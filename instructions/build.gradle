@@ -1,0 +1,31 @@
+defaultTasks 'clean', 'build'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+version = '1.0-SNAPSHOT'
+group = 'org.suggs.interviews.example'
+
+task wrapper(type: Wrapper){
+    description = 'Generates gradlew scripts for NIX and win envs'
+    gradleVersion = '2.0'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+}
+
+idea.module {
+    downloadSources = true
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.5'
+
+    runtime 'org.slf4j:slf4j-log4j12:1.7.5',
+            'log4j:log4j:1.2.17'
+
+    testCompile 'junit:junit:4.11'
+}
