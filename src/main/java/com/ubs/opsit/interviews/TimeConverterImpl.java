@@ -1,5 +1,6 @@
 package com.ubs.opsit.interviews;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 
 /**
@@ -9,12 +10,28 @@ import java.util.Arrays;
  */
 public class TimeConverterImpl implements TimeConverter {
 
-    public static final String SECOND_BLINK = "Y";
-    public static final char OFF = 'O';
+    private static final String SECOND_BLINK = "Y";
+    private static final char OFF = 'O';
 
-    public static final String HOURS_TEMPLATE = "RRRR";
-    public static final String MINUTES_TOP_ROW_TEMPLATE = "YYRYYRYYRYY";
-    public static final String MINUTES_BOTTOM_ROW_TEMPLATE = "YYYY";
+    private static final String HOURS_TEMPLATE = "RRRR";
+    private static final String MINUTES_TOP_ROW_TEMPLATE = "YYRYYRYYRYY";
+    private static final String MINUTES_BOTTOM_ROW_TEMPLATE = "YYYY";
+
+    private static class BerlinClock {
+        final boolean secondBlink;
+        final int hoursTopRow;
+        final int hoursSecondRow;
+        final int minutesTopRow;
+        final int minutesSecondRow;
+
+        private BerlinClock(boolean secondBlink, int hoursTopRow, int hoursSecondRow, int minutesTopRow, int minutesSecondRow) {
+            this.secondBlink = secondBlink;
+            this.hoursTopRow = hoursTopRow;
+            this.hoursSecondRow = hoursSecondRow;
+            this.minutesTopRow = minutesTopRow;
+            this.minutesSecondRow = minutesSecondRow;
+        }
+    }
 
     /**
      * Converts time from HH-MM-SS format into Berlin Clock format
@@ -24,51 +41,33 @@ public class TimeConverterImpl implements TimeConverter {
      */
     @Override
     public String convertTime(String aTime) {
-        final int[] time = parseTime(aTime);
-        final int hours = time[0];
-        final int minutes = time[1];
-        final int seconds = time[2];
-
-        final boolean secondBlink = seconds % 3 == 0;
-        final int hoursTopRow = hours / 5;
-        final int hoursSecondRow = hours % 5;
-        final int minutesTopRow = minutes / 5;
-        final int minutesSecondRow = minutes % 5;
-
-        return printBerlinClock(secondBlink, hoursTopRow, hoursSecondRow, minutesTopRow, minutesSecondRow);
+        final LocalTime time = LocalTime.parse(aTime);
+        final BerlinClock berlinClock = calculateBerlinClock(time);
+        return printBerlinClock(berlinClock);
     }
 
-    private int[] parseTime(String aTime) {
-        if (aTime == null || aTime.isEmpty()) {
-            throw new IllegalArgumentException("Time is required");
-        }
-
-        final String[] time = aTime.split(":");
-        if (time.length != 3) {
-            throw new IllegalArgumentException("Illegal time format, required HH-MM-SS");
-        }
-
-        final int hours = Integer.parseInt(time[0]);
-        final int minutes = Integer.parseInt(time[1]);
-        final int seconds = Integer.parseInt(time[2]);
-
-        return new int[]{hours, minutes, seconds};
+    private BerlinClock calculateBerlinClock(LocalTime time) {
+        final boolean secondBlink = time.getSecond() % 3 == 0;
+        final int hoursTopRow = time.getHour() / 5;
+        final int hoursSecondRow = time.getHour() % 5;
+        final int minutesTopRow = time.getMinute() / 5;
+        final int minutesSecondRow = time.getMinute() % 5;
+        return new BerlinClock(secondBlink, hoursTopRow, hoursSecondRow, minutesTopRow, minutesSecondRow);
     }
 
-    private String printBerlinClock(boolean secondBlink, int hoursTopRow, int hoursSecondRow,
-                                    int minutesTopRow, int minutesSecondRow) {
+    private String printBerlinClock( BerlinClock bc) {
         final StringBuilder berlinClock = new StringBuilder();
-        berlinClock.append(secondBlink ? SECOND_BLINK : OFF);
-        berlinClock.append("\n");
+        berlinClock.append(bc.secondBlink ? SECOND_BLINK : OFF);
+        berlinClock.append(System.lineSeparator());
 
-        printBerlinClockLine(berlinClock, HOURS_TEMPLATE, hoursTopRow);
-        berlinClock.append("\n");
-        printBerlinClockLine(berlinClock, HOURS_TEMPLATE, hoursSecondRow);
-        berlinClock.append("\n");
+        printBerlinClockLine(berlinClock, HOURS_TEMPLATE, bc.hoursTopRow);
+        berlinClock.append(System.lineSeparator());
+        printBerlinClockLine(berlinClock, HOURS_TEMPLATE, bc.hoursSecondRow);
+        berlinClock.append(System.lineSeparator());
 
-        printBerlinClockLine(berlinClock, MINUTES_TOP_ROW_TEMPLATE, minutesTopRow);
-        berlinClock.append("\n");
-        printBerlinClockLine(berlinClock, MINUTES_BOTTOM_ROW_TEMPLATE, minutesSecondRow);
+        printBerlinClockLine(berlinClock, MINUTES_TOP_ROW_TEMPLATE, bc.minutesTopRow);
+        berlinClock.append(System.lineSeparator());
+        printBerlinClockLine(berlinClock, MINUTES_BOTTOM_ROW_TEMPLATE, bc.minutesSecondRow);
 
         return berlinClock.toString();
     }
