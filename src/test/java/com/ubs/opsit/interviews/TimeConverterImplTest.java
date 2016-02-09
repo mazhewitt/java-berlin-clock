@@ -33,8 +33,8 @@ public class TimeConverterImplTest {
 	
 	@Test
     public void testYellowLampShouldBlinkOnOffEveryTwoSeconds() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
-	timeConverter.convertTime("13:12:10");
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("13:12:10");
         assertEquals("Y", timeConverter.getBerlinClock().getSecondRow());
         
         timeConverter.convertTime("13:12:09");
@@ -43,7 +43,8 @@ public class TimeConverterImplTest {
 	
 	@Test
     public void testTopHourRowShouldBlinkRedLampForEvery5Hours() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("00:12:00");
         assertEquals("OOOO", timeConverter.getBerlinClock().getHoursTopRow());
         
         timeConverter.convertTime("23:12:00");
@@ -53,8 +54,8 @@ public class TimeConverterImplTest {
 	
 	@Test
     public void testBottomHourRowShouldBlinkRedLampForEveryHourRemainedFromTopHours() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
-	timeConverter.convertTime("23:12:00");
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("23:12:00");
         assertEquals("RRRO", timeConverter.getBerlinClock().getHoursBottomRow());
         
         timeConverter.convertTime("13:00:00");
@@ -62,9 +63,9 @@ public class TimeConverterImplTest {
     }
 	
 	@Test
-    public void testTopRowShouldHave3rd6thAnd9thLampsInRedToShowFirstHalfAndLastQuarter() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
-	timeConverter.convertTime("13:54:00");
+    public void testTopRowhouldHave3rd6thAnd9thLampsInRedToShowFirstHalfAndLastQuarter() {
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("13:54:00");
         assertEquals("R", timeConverter.getBerlinClock().getMinutesTopRow().substring(2, 3));
         assertEquals("R", timeConverter.getBerlinClock().getMinutesTopRow().substring(5, 6));
         assertEquals("R", timeConverter.getBerlinClock().getMinutesTopRow().substring(8, 9));
@@ -72,25 +73,25 @@ public class TimeConverterImplTest {
 	
 	@Test
     public void testTopMinuteRowShouldBlinkYellowForEvery5MinutesUnlessItIsFirstQuarterHalfOrLastQuarter() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
-	timeConverter.convertTime("13:00:00");
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("13:00:00");
         assertEquals("OOOOOOOOOOO", timeConverter.getBerlinClock().getMinutesTopRow());
         
-	timeConverter.convertTime("13:59:00");
+		timeConverter.convertTime("13:59:00");
         assertEquals("YYRYYRYYRYY", timeConverter.getBerlinClock().getMinutesTopRow());
     }
 	
 	@Test
     public void testBottomMinuteRowCanLightYellowLampForEveryMinuteRemainedFromTopMinuteRow() {
-	TimeConverterImpl timeConverter = new TimeConverterImpl();
-	timeConverter.convertTime("13:17:00");
+		TimeConverterImpl timeConverter = new TimeConverterImpl();
+		timeConverter.convertTime("13:17:00");
         assertEquals("YYOO", timeConverter.getBerlinClock().getMinutesBottomRow());
     }
 	
 	@Test
 	public void testConverterConvertsTimeCorrectInBerlinClockFormat() {
 		String actualConvertedTime = timeConverter.convertTime("13:32:10");
-		String expectedTime = "Y" + "\n" + "RROO" + "\n" + "RRRO" + "\n" + "YYRYYROOOOO" + "\n" + "YYOO";
+		String expectedTime = "Y" + System.lineSeparator() + "RROO" + System.lineSeparator() + "RRRO" + System.lineSeparator() + "YYRYYROOOOO" + System.lineSeparator() + "YYOO" + System.lineSeparator();
 		
 		assertNotNull(actualConvertedTime);
 		assertEquals(expectedTime, actualConvertedTime);
