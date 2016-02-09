@@ -1,13 +1,13 @@
+package com.main;
 
 public class BerlinClock {
-
-	private boolean secondRow;
-	private int hoursTopRow;
-	private int hoursBottomRow;
-	private int minutesTopRow;
-	private int minutesBottomRow;
-
-	public BerlinClock(boolean secondRow, int hoursTopRow, int hoursBottomRow, int minutesTopRow, int minutesBottomRow) {
+	private String secondRow;
+	private String hoursTopRow;
+	private String hoursBottomRow;
+	private String minutesTopRow;
+	private String minutesBottomRow;
+	
+	public BerlinClock(String secondRow, String hoursTopRow, String hoursBottomRow, String minutesTopRow, String minutesBottomRow) {
 		this.secondRow = secondRow;
 		this.hoursTopRow = hoursTopRow;
 		this.hoursBottomRow = hoursBottomRow;
@@ -15,43 +15,32 @@ public class BerlinClock {
 		this.minutesBottomRow = minutesBottomRow;
 	}
 	
-	public boolean getSecondRow() {
+	public String getSecondRow() {
 		return secondRow;
 	}
 
-	public void setSecondRow(boolean secondRow) {
-		this.secondRow = secondRow;
-	}
-
-	public int getHoursTopRow() {
+	public String getHoursTopRow() {
 		return hoursTopRow;
 	}
 
-	public void setHoursTopRow(int hoursTopRow) {
-		this.hoursTopRow = hoursTopRow;
-	}
-
-	public int getHoursBottomRow() {
+	public String getHoursBottomRow() {
 		return hoursBottomRow;
 	}
 
-	public void setHoursBottomRow(int hoursBottomRow) {
-		this.hoursBottomRow = hoursBottomRow;
-	}
-
-	public int getMinutesTopRow() {
+	public String getMinutesTopRow() {
 		return minutesTopRow;
 	}
 
-	public void setMinutesTopRow(int minutesTopRow) {
-		this.minutesTopRow = minutesTopRow;
-	}
-
-	public int getMinutesBottomRow() {
+	public String getMinutesBottomRow() {
 		return minutesBottomRow;
 	}
 
-	public void setMinutesBottomRow(int minutesBottomRow) {
-		this.minutesBottomRow = minutesBottomRow;
+	@Override
+	public String toString() {
+		return getSecondRow() + System.lineSeparator() + 
+				getHoursTopRow() + System.lineSeparator() + 
+				getHoursBottomRow() + System.lineSeparator() + 
+				getMinutesTopRow() + System.lineSeparator() + 
+				getMinutesBottomRow();
 	}
 }
