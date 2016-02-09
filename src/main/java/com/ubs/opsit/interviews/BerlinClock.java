@@ -1,4 +1,4 @@
-package com.main;
+package com.ubs.opsit.interviews;
 
 public class BerlinClock {
 	private String secondRow;
