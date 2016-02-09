@@ -1,4 +1,4 @@
-package com.main;
+package com.ubs.opsit.interviews;
 
 import java.time.LocalTime;
 import java.util.Arrays;
