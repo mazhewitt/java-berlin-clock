@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class TimeConverterImpl implements TimeConverter{
 
+	private static final int END_NIGHT_HOUR = 24;
 	private final static char OFF = 'O';
 	private final static String SECOND_ROW_FORMAT = "Y";
 	private final static String HOUR_ROW_FORMAT = "RRRR";
@@ -12,16 +13,25 @@ public class TimeConverterImpl implements TimeConverter{
 	private final static String MINUTE_BOTTOM_ROW_FORMAT = "YYYY";
 	private BerlinClock berlinClock;
 
-	@Override
+	
 	public String convertTime(String aTime) {
-		LocalTime localTime = convertTimeStringToLocalTime(aTime);
-		berlinClock = buildBerlinClock(localTime);
+		int[] time = convertTimeStringToLocalTime(aTime);
+		berlinClock = buildBerlinClock(time);
 		return berlinClock.toString();
 	}
 	
-	private LocalTime convertTimeStringToLocalTime(String aTime) {
+	private int[] convertTimeStringToLocalTime(String aTime) {
 		verifyFormat(aTime);
-		return LocalTime.parse(aTime);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		TemporalAccessor accessor = formatter.parse(aTime);
+		LocalTime time = LocalTime.from(accessor);
+		Period period = accessor.query(DateTimeFormatter.parsedExcessDays());
+		
+		int hour = time.getHour();
+		if(period.equals(Period.ofDays(1))) {  //This logic to handle "24:00:00" scenerio
+			hour = END_NIGHT_HOUR;
+		}
+		return new int[] {hour, time.getMinute(), time.getSecond()};
 	}
 	
 	private void verifyFormat(String aTime) {
@@ -33,14 +43,14 @@ public class TimeConverterImpl implements TimeConverter{
 		}
 	}
 	
-	private BerlinClock buildBerlinClock(LocalTime localTime) {
-		String secondRow = (localTime.getSecond()%2 == 0) ? SECOND_ROW_FORMAT : Character.toString(OFF);
+	private BerlinClock buildBerlinClock(int[] time) {
+		String secondRow = (time[2]%2 == 0) ? SECOND_ROW_FORMAT : Character.toString(OFF);
 		
-		String hoursTopRow = getBerlinClockRow(localTime.getHour()/5, HOUR_ROW_FORMAT);
-		String hoursBottomRow = getBerlinClockRow(localTime.getHour()%5, HOUR_ROW_FORMAT);
+		String hoursTopRow = getBerlinClockRow(time[0]/5, HOUR_ROW_FORMAT);
+		String hoursBottomRow = getBerlinClockRow(time[0]%5, HOUR_ROW_FORMAT);
 		
-		String minutesTopRow = getBerlinClockRow(localTime.getMinute()/5, MINUTE_TOP_ROW_FORMAT);
-		String minutesBottomRow = getBerlinClockRow(localTime.getMinute()%5, MINUTE_BOTTOM_ROW_FORMAT);
+		String minutesTopRow = getBerlinClockRow(time[1]/5, MINUTE_TOP_ROW_FORMAT);
+		String minutesBottomRow = getBerlinClockRow(time[1]%5, MINUTE_BOTTOM_ROW_FORMAT);
 		
 		return new BerlinClock(secondRow, hoursTopRow, hoursBottomRow, minutesTopRow, minutesBottomRow);
 	}
