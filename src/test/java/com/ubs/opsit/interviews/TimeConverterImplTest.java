@@ -91,9 +91,9 @@ public class TimeConverterImplTest {
 	@Test
 	public void testConverterConvertsTimeCorrectInBerlinClockFormat() {
 		String actualConvertedTime = timeConverter.convertTime("13:32:10");
-		String expectedTime = "Y" + System.lineSeparator() + "RROO" + System.lineSeparator() + "RRRO" + System.lineSeparator() + "YYRYYROOOOO" + System.lineSeparator() + "YYOO" + System.lineSeparator();
+		String expectedTime = "Y" + System.lineSeparator() + "RROO" + System.lineSeparator() + "RRRO" + System.lineSeparator() + "YYRYYROOOOO" + System.lineSeparator() + "YYOO";
 		
 		assertNotNull(actualConvertedTime);
-		assertEquals(expectedTime, actualConvertedTime);
+		assertEquals(expectedTime.trim(), actualConvertedTime.trim());
 	}
 }
