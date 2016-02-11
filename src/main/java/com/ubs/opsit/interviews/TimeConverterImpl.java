@@ -1,6 +1,9 @@
 package com.ubs.opsit.interviews;
 
 import java.time.LocalTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 
 public class TimeConverterImpl implements TimeConverter{
