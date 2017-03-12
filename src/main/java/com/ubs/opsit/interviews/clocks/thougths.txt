@@ -1,0 +1,3 @@
+All classes in this package can be private static inner classes of BerlinClock with private constructors to be hidden completely
+
+Overall, it is an object oriented style conversion, and possibly an overkill to a task which can be done procedurally in several lines of code
