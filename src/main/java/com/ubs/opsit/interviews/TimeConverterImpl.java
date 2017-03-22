@@ -8,6 +8,11 @@ public class TimeConverterImpl implements TimeConverter {
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String MIDNIGHT = "24:00:00";
 
+    /***
+     *
+     * @param time String in format HH:mm:ss that would be converted to pseudo graphical "Berlin clock"
+     * @return String that represents pseudo graphical "Berlin clock"
+     */
     @Override
     public String convertTime(String time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);

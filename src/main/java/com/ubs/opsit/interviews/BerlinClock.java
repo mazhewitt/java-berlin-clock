@@ -3,6 +3,9 @@ package com.ubs.opsit.interviews;
 
 import java.util.Arrays;
 
+/***
+ * class that models Berlin clock
+ */
 public class BerlinClock {
 
     public static final char YELLOW = 'Y';
@@ -28,6 +31,12 @@ public class BerlinClock {
         Arrays.fill(oneMinuteRow, EMTY);
     }
 
+    /***
+     *
+     * @param hours values from 00 to 24
+     * @param minutes values from 00 to 59
+     * @param seconds values from 00 to 59
+     */
     public void setTime(int hours, int minutes, int seconds) {
         if (seconds % 2 == 0) {
             topLamp[0] = YELLOW;
@@ -55,6 +64,10 @@ public class BerlinClock {
 
     }
 
+    /***
+     *
+     * @return String that represents pseudo graphical "Berlin clock"
+     */
     public String buildClock() {
         StringBuilder result = new StringBuilder();
         result.append(topLamp);
