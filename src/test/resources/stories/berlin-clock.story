@@ -44,5 +44,9 @@ RRRR
 OOOOOOOOOOO
 OOOO
 
+Scenario: Bad input
+When the time is 25:02:01
+Then DateTimeParseException happens
+
 
 
