@@ -15,6 +15,7 @@ public class TimeConverterImpl implements TimeConverter{
     @Override
     public String convertTime(String aTime) {
         LOG.info("[TimeConverterImpl] Converting time {}", aTime);
+        //Added an extra service layer to allow any preconversion of time format
         return timeConverterService.convertToBerlinTime(aTime);
     }
 
