@@ -33,4 +33,13 @@ public class BerlinClockFixture {
     public void thenTheClockShouldLookLike(String theExpectedBerlinClockOutput) {
         assertThat(berlinClock.convertTime(theTime)).isEqualTo(theExpectedBerlinClockOutput);
     }
+
+    @Then("there should be an error$")
+    public void thenErrorMsgShouldBe(String expectedError) {
+        try {
+            berlinClock.convertTime(theTime);
+        }catch(RuntimeException ex){
+            assertThat(expectedError).isEqualTo(ex.getMessage());
+        }
+    }
 }

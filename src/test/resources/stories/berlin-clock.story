@@ -44,5 +44,70 @@ RRRR
 OOOOOOOOOOO
 OOOO
 
+Scenario: At 3 pm
+When the time is 15:00:00
+Then the clock should look like
+Y
+RRRO
+OOOO
+OOOOOOOOOOO
+OOOO
 
 
+Scenario: Incorrect Time case 1
+When the time is 24:01:00
+there should be an error
+Incorrect time for conversion
+
+
+Scenario: Incorrect Time case 2
+When the time is 23:63:00
+there should be an error
+Incorrect Hour!! hour >63
+
+
+Scenario: Incorrect Time case 3
+When the time is 23:45:75
+there should be an error
+Incorrect second!! second >75
+
+
+Scenario: Incorrect Time case 4
+When the time is 24:00:26
+there should be an error
+Incorrect time for conversion
+
+
+Scenario: Incorrect Time case 4
+When the time is 23-00-00
+there should be an error
+Incorrect Time format
+
+
+Scenario: At 3:30:00 pm
+When the time is 15:30:00
+Then the clock should look like
+Y
+RRRO
+OOOO
+YYRYYROOOOO
+OOOO
+
+Scenario: At 3:30:59 pm
+When the time is 15:30:59
+Then the clock should look like
+O
+RRRO
+OOOO
+YYRYYROOOOO
+OOOO
+
+
+Scenario: At 3:31:59 pm
+When the time is 15:31:59
+Then the clock should look like
+O
+RRRO
+OOOO
+YYRYYROOOOO
+YOOO
