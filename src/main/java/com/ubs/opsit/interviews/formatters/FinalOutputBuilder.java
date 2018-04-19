@@ -25,12 +25,5 @@ public class FinalOutputBuilder {
 				new SecondsOutputFormatter(SECONDS).buildSecondsRow() 
 				+ new HourOutputFormatter(HOURS).buildHoursRows() 
 				+ new MinutesOutputFormatter(MINUTES).buildMinutesRows();
-		
-				/*"Y\n" + 
-				"OOOO\n" + 
-				"OOOO\n" + 
-				"OOOOOOOOOOO\n" + 
-				"OOOO";*/
-
 	}
 }

@@ -24,7 +24,6 @@ public class MinutesOutputFormatter {
 
 
 	public int getMinutesLowerRow() {
-		// TODO Auto-generated method stub
 		if(CURRENT_MINUTES < UPPER_LAMP_VALUE)
 		{
 			return CURRENT_MINUTES;

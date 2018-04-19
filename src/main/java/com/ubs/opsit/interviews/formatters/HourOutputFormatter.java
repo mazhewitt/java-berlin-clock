@@ -12,18 +12,14 @@ public class HourOutputFormatter {
 	}
 
 	public String buildHoursRows() {
-		int uppperLamps = getHoursUpperLamps();
-		int lowerLamps = getHoursLowerLamps();
-		return formatOutput(uppperLamps,lowerLamps);
+		return formatOutput(getHoursUpperLamps(),getHoursUpperLamps());
 	}
 
 	private String formatOutput(int uppperLamps, int lowerLamps) {
-		String upperLampsOutput = "";
 		for(int i = 0; i < uppperLamps; i++) {
 			UPPER_LAMPS_ROW.replace(i, i+1, "R");
 		}
 		
-		String lowerLampsOutput = "";
 		for(int i = 0; i < lowerLamps; i++) {
 			LOWER_LAMPS_ROW.replace(i, i+1, "R");
 		}
