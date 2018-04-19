@@ -12,7 +12,7 @@ public class HourOutputFormatter {
 	}
 
 	public String buildHoursRows() {
-		return formatOutput(getHoursUpperLamps(),getHoursUpperLamps());
+		return formatOutput(getHoursUpperLamps(),getHoursLowerLamps());
 	}
 
 	private String formatOutput(int uppperLamps, int lowerLamps) {
