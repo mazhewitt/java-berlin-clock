@@ -1,8 +1,11 @@
-package com.ubs.opsit.interviews;
+package com.ubs.opsit.interviews.formatters;
 
 public class HourOutputFormatter {
 	
-	private static int CURRENT_HOURS;
+	private int CURRENT_HOURS;
+	private int UPPER_LAMP_VALUE = 5;
+	private StringBuilder UPPER_LAMPS_ROW = new StringBuilder("OOOO");
+	private StringBuilder LOWER_LAMPS_ROW = new StringBuilder("OOOO");
 	
 	public HourOutputFormatter(int hours) {
 		CURRENT_HOURS = hours;
@@ -17,24 +20,30 @@ public class HourOutputFormatter {
 	private String formatOutput(int uppperLamps, int lowerLamps) {
 		String upperLampsOutput = "";
 		for(int i = 0; i < uppperLamps; i++) {
-			upperLampsOutput = upperLampsOutput + "Y";
+			UPPER_LAMPS_ROW.replace(i, i+1, "R");
 		}
 		
 		String lowerLampsOutput = "";
 		for(int i = 0; i < lowerLamps; i++) {
-			lowerLampsOutput = lowerLampsOutput + "Y";
+			LOWER_LAMPS_ROW.replace(i, i+1, "R");
 		}
-		return upperLampsOutput + "\n" + lowerLampsOutput + "\n";
+		return UPPER_LAMPS_ROW + "\n" + LOWER_LAMPS_ROW + "\n";
 	}
 
 	public int getHoursLowerLamps() {
-		return CURRENT_HOURS / (LampsRow.HOURS_LOWER.getValue() + 1);
+		if (CURRENT_HOURS < UPPER_LAMP_VALUE)
+		{
+			return CURRENT_HOURS;
+		}else
+		{
+			return CURRENT_HOURS % UPPER_LAMP_VALUE;
+		}
 	}
 
 	public int getHoursUpperLamps() {
-		if(CURRENT_HOURS < (LampsRow.HOURS_UPPER.getValue() + 1))
+		if(CURRENT_HOURS < UPPER_LAMP_VALUE)
 			return 0;
 		else 
-			return CURRENT_HOURS / (LampsRow.HOURS_UPPER.getValue() + 1);
+			return CURRENT_HOURS / UPPER_LAMP_VALUE;
 	}
 }

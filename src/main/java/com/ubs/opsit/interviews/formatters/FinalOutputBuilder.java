@@ -1,4 +1,6 @@
-package com.ubs.opsit.interviews;
+package com.ubs.opsit.interviews.formatters;
+
+
 
 public class FinalOutputBuilder {
 
@@ -14,26 +16,21 @@ public class FinalOutputBuilder {
 		SECONDS = Integer.parseInt(arr[2]);
 	}
 	
+	public String getOutput() {
+		return null;
+	}
+	
 	public String getFinalOutput() {
-		return buildSecondsRow() 
+		return 
+				new SecondsOutputFormatter(SECONDS).buildSecondsRow() 
 				+ new HourOutputFormatter(HOURS).buildHoursRows() 
-				+ buildMinutesRows(); 
+				+ new MinutesOutputFormatter(MINUTES).buildMinutesRows();
+		
 				/*"Y\n" + 
 				"OOOO\n" + 
 				"OOOO\n" + 
 				"OOOOOOOOOOO\n" + 
 				"OOOO";*/
+
 	}
-
-	private String buildSecondsRow() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-
-	private String buildMinutesRows() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-
-
 }
