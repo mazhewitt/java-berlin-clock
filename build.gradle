@@ -9,7 +9,7 @@ group = 'org.suggs.interviews.berlinclock'
 
 task wrapper(type: Wrapper){
     description = 'Generates gradlew scripts for NIX and win envs'
-    gradleVersion = '2.0'
+    gradleVersion = '2.6'
 }
 
 repositories {
