@@ -12,11 +12,8 @@ first row every lamp represents 5 minutes. In this first row the 3rd, 6th and 9t
 quarter, half and last quarter of an hour. The other lamps are yellow. In the last row with 4 lamps every lamp
 represents 1 minute.
 
-One can be seen [here](http://uniqueclocks.co.uk/media/berlin~clock.jpg~1.gif)
+One can be seen [here](https://en.wikipedia.org/wiki/Mengenlehreuhr)
 
-## The brief
-
-We have created a number of acceptance tests for the Berlin Clock and your challenge is to get them passing.
 
 ## Some hints
 If you are new to Gradle, it may be worth spending 10 minutes reading a high level summary.  We are using the Gradle
