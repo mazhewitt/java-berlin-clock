@@ -1,5 +1,7 @@
 package com.ubs.opsit.interviews;
 
+import com.ubs.opsit.interviews.kotlin.BerlinClock;
+import com.ubs.opsit.interviews.kotlin.TimeConverter;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Test;
@@ -13,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class BerlinClockFixture {
 
-    private TimeConverter berlinClock;
+    private TimeConverter berlinClock = new BerlinClock();
     private String theTime;
 
     @Test
