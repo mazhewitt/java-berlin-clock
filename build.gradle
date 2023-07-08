@@ -34,3 +34,13 @@ dependencies {
             'commons-io:commons-io:2.4',
             'org.jbehave:jbehave-core:3.8'
 }
+
+allprojects {
+    repositories {
+        mavenLocal()
+        // Any Organization/Company specific repo url goes here
+        maven {
+            url "https://repo1.maven.org/maven2"
+        }
+    }
+}
